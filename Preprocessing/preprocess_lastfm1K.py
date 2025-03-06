@@ -37,6 +37,11 @@ if __name__ == "__main__":
                                            sub_datasets=args.subdatasets,
                                            columns=args.dataset_columns)
 
+    # Check if datasets are loaded correctly
+    if plays is None or users is None:
+        RcLogger.error("Failed to load the dataset. Please check the dataset path and parameters.")
+        raise ValueError("Failed to load the dataset.")
+    
     plays: pd.DataFrame = tfds.as_dataframe(plays)
     users: pd.DataFrame = tfds.as_dataframe(users)
 
